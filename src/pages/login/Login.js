@@ -10,7 +10,7 @@ import img1 from "../../images/Vector-1.svg";
 import img2 from "../../images/Vector-2.svg";
 import img3 from "../../images/Vector-3.svg";
 import img4 from "../../images/Vector-4.svg";
-
+import LoginAPI from "../../RestAPI/Admin/login-api";
 class Login extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
@@ -24,8 +24,8 @@ class Login extends React.Component {
     super(props);
 
     this.state = {
-      email: "admin@flatlogic.com",
-      password: "password",
+      email: "vinh5051@gmail.com",
+      password: "abc123!@#QWE",
     };
 
     this.doLogin = this.doLogin.bind(this);
@@ -45,10 +45,35 @@ class Login extends React.Component {
   }
 
   doLogin(e) {
-    e.preventDefault();
-    this.props.dispatch(
-      loginUser({ email: this.state.email, password: this.state.password })
-    );
+    // alert(this.state.email + "/" + this.state.password);
+    LoginAPI(this.state.email, this.state.password)
+      .then((json) => {
+        var DataLoginUser = JSON.parse(JSON.stringify(json));
+        console.log(DataLoginUser);
+        if (DataLoginUser.accessToken) {
+          e.preventDefault();
+          this.props.dispatch(
+            loginUser({
+              token: DataLoginUser.accessToken,
+            })
+          );
+          alert("OK");
+          window.location.reload(false);
+        } else {
+          alert("Not Success");
+        }
+      })
+      .catch((error) => {
+        console.error(error + "fail");
+      });
+    // e.preventDefault();
+    // this.props.dispatch(
+    //   loginUser({
+    //     email: this.state.email,
+    //     password: this.state.password,
+    //   })
+    // );
+    // console.log(i + "data");
   }
 
   googleLogin() {
@@ -64,13 +89,15 @@ class Login extends React.Component {
   }
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/app' } }; // eslint-disable-line
+    const { from } = this.props.location.state || {
+      from: { pathname: "/app" },
+    }; // eslint-disable-line
 
     // cant access login page while logged in
-    if (Login.isAuthenticated(JSON.parse(localStorage.getItem('authenticated')))) {
-      return (
-          <Redirect to={from} />
-      );
+    if (
+      Login.isAuthenticated(JSON.parse(localStorage.getItem("authenticated")))
+    ) {
+      return <Redirect to={from} />;
     }
 
     return (
@@ -96,7 +123,7 @@ class Login extends React.Component {
               <Label for="search-input1">Username</Label>
               <input
                 className="form-control"
-                defaultValue={"admin"}
+                defaultValue={"vinh5051@gmail.com"}
                 onChange={this.changeEmail}
                 required
                 name="email"
@@ -107,7 +134,7 @@ class Login extends React.Component {
               <Label for="search-input1">Password</Label>
               <input
                 className="form-control"
-                defaultValue={"123123"}
+                defaultValue={"abc123!@#QWE"}
                 onChange={this.changePassword}
                 type="password"
                 required
@@ -116,10 +143,7 @@ class Login extends React.Component {
               />
             </div>
             <FormGroup className="checkbox abc-checkbox mb-4 d-flex" check>
-              <Input
-                id="checkbox1"
-                type="checkbox"
-              />
+              <Input id="checkbox1" type="checkbox" />
               <Label for="checkbox1" check className={"mr-auto"}>
                 Remember me
               </Label>
