@@ -37,13 +37,13 @@ export function logoutUser() {
   };
 }
 
-export function loginUser(creds) {
+export function loginUser(token) {
   return (dispatch) => {
     dispatch(receiveLogin());
 
-    if (creds.token.length > 0) {
+    if (token.length > 0) {
       localStorage.setItem("authenticated", true);
-      localStorage.setItem("authenticatedToken", creds.token);
+      localStorage.setItem("accessToken", token);
     } else {
       dispatch(loginError("Something was wrong. Try again"));
     }

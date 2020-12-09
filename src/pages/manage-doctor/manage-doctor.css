@@ -1,0 +1,77 @@
+.doctor-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.doctor-cell {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.title {
+    width: 200px;
+}
+
+.create-at {
+    width: 150px;
+}
+
+.doctor-row2 {
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 6px;
+    margin-right: 33px;
+    margin-bottom: 10px;
+}
+
+.doctor-row {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 10%;
+    margin-bottom: 20px;
+}
+
+.doctor-key {
+    width: 150px;
+}
+    
+.doctor-value {
+    width: 80%;
+    margin-left: 5%;
+    border: 0px;
+    background-color: #FAFAFA;
+}
+
+.create-doctor-value {
+    width: 80%;
+    margin-left: 1%;
+    border: 1px solid #ababad;
+    border-radius: 5px;
+    background-color: #FAFAFA;
+}
+
+.doctor-button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 50px;
+    margin-top: 10px;
+}
+
+.doctor-component {
+    top                   : 0;
+    left                  : 50%;
+    right                 : auto;
+    bottom                : auto;
+    marginRight           : -50%;
+    transform             : translate(0%, -70%);
+
+
+    background-color: #ffffff;
+
+    border:0.03px solid rgb(173, 171, 171);
+    border-radius: 30px;
+    box-shadow: 20px 40px  50px rgb(83, 83, 83);
+
+    padding: 20px 5px;
+}

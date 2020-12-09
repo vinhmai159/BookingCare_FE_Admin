@@ -10,7 +10,7 @@ import img1 from "../../images/Vector-1.svg";
 import img2 from "../../images/Vector-2.svg";
 import img3 from "../../images/Vector-3.svg";
 import img4 from "../../images/Vector-4.svg";
-import LoginAPI from "../../RestAPI/Admin/login-api";
+
 class Login extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
@@ -24,13 +24,11 @@ class Login extends React.Component {
     super(props);
 
     this.state = {
-      email: "vinh5051@gmail.com",
+      email: "admin9",
       password: "abc123!@#QWE",
     };
 
     this.doLogin = this.doLogin.bind(this);
-    this.googleLogin = this.googleLogin.bind(this);
-    this.microsoftLogin = this.microsoftLogin.bind(this);
     this.changeEmail = this.changeEmail.bind(this);
     this.changePassword = this.changePassword.bind(this);
     this.signUp = this.signUp.bind(this);
@@ -44,20 +42,31 @@ class Login extends React.Component {
     this.setState({ password: event.target.value });
   }
 
+  LoginAPI = async (user, password) => {
+    var url = "http://127.0.0.1:3069/api/admin/login";
+    return await fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userName: user,
+        password: password,
+      }),
+    }).then((response) => response.json());
+  };
+
   doLogin(e) {
-    // alert(this.state.email + "/" + this.state.password);
-    LoginAPI(this.state.email, this.state.password)
+    this.LoginAPI(this.state.email, this.state.password)
       .then((json) => {
         var DataLoginUser = JSON.parse(JSON.stringify(json));
         console.log(DataLoginUser);
         if (DataLoginUser.accessToken) {
           e.preventDefault();
           this.props.dispatch(
-            loginUser({
-              token: DataLoginUser.accessToken,
-            })
+            loginUser(DataLoginUser.accessToken)
           );
-          alert("OK");
           window.location.reload(false);
         } else {
           alert("Not Success");
@@ -66,22 +75,6 @@ class Login extends React.Component {
       .catch((error) => {
         console.error(error + "fail");
       });
-    // e.preventDefault();
-    // this.props.dispatch(
-    //   loginUser({
-    //     email: this.state.email,
-    //     password: this.state.password,
-    //   })
-    // );
-    // console.log(i + "data");
-  }
-
-  googleLogin() {
-    this.props.dispatch(loginUser({ social: "google" }));
-  }
-
-  microsoftLogin() {
-    this.props.dispatch(loginUser({ social: "microsoft" }));
   }
 
   signUp() {
@@ -123,7 +116,7 @@ class Login extends React.Component {
               <Label for="search-input1">Username</Label>
               <input
                 className="form-control"
-                defaultValue={"vinh5051@gmail.com"}
+                defaultValue={"admin9"}
                 onChange={this.changeEmail}
                 required
                 name="email"

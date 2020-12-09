@@ -1,0 +1,77 @@
+.hospital-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.hospital-cell {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.title {
+    width: 200px;
+}
+
+.create-at {
+    width: 150px;
+}
+
+.hospital-row2 {
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 6px;
+    margin-right: 33px;
+    margin-bottom: 10px;
+}
+
+.hospital-row {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 10%;
+    margin-bottom: 20px;
+}
+
+.hospital-key {
+    width: 150px;
+}
+    
+.hospital-value {
+    width: 80%;
+    margin-left: 5%;
+    border: 0px;
+    background-color: #FAFAFA;
+}
+
+.create-hospital-value {
+    width: 80%;
+    margin-left: 1%;
+    border: 1px solid #ababad;
+    border-radius: 5px;
+    background-color: #FAFAFA;
+}
+
+.hospital-button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 50px;
+    margin-top: 10px;
+}
+
+.hospital-component {
+    top                   : 0;
+    left                  : 50%;
+    right                 : auto;
+    bottom                : auto;
+    marginRight           : -50%;
+    transform             : translate(0%, -100%);
+
+
+    background-color: #ffffff;
+
+    border:0.03px solid rgb(173, 171, 171);
+    border-radius: 30px;
+    box-shadow: 20px 40px  50px rgb(83, 83, 83);
+
+    padding: 20px 5px;
+}

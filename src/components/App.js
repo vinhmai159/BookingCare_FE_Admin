@@ -4,9 +4,7 @@ import { Switch, Route, Redirect } from 'react-router';
 import { HashRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-/* eslint-disable */
 import ErrorPage from '../pages/error';
-/* eslint-enable */
 
 import '../styles/theme.scss';
 import LayoutComponent from '../components/Layout';
@@ -19,7 +17,7 @@ const PrivateRoute = ({dispatch, component, ...rest }) => {
         dispatch(logoutUser());
         return (<Redirect to="/login"/>)
     } else {
-        return ( // eslint-disable-line
+        return (
             <Route {...rest} render={props => (React.createElement(component, props))}/>
         );
     }

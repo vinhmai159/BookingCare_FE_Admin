@@ -5,8 +5,6 @@ import { Switch, Route, withRouter, Redirect } from "react-router";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Hammer from "rc-hammerjs";
 
-import Dashboard from "../../pages/dashboard";
-import Header from "../Header";
 import Sidebar from "../Sidebar";
 import {
   openSidebar,
@@ -17,12 +15,21 @@ import s from "./Layout.module.scss";
 import BreadcrumbHistory from "../BreadcrumbHistory";
 
 // pages
-import Typography from "../../pages/typography";
-import Maps from "../../pages/maps";
-import Notifications from "../../pages/notifications/Notifications";
-import Icons from "../../pages/icons";
-import Tables from "../../pages/tables";
-import Charts from "../../pages/charts";
+import ManageUser from "../../pages/manage-user/manage-user";
+import UserDetail from "../../pages/manage-user/user-detail";
+import ManageDoctor from "../../pages/manage-doctor/manage-doctor";
+import CreateDoctor from "../../pages/manage-doctor/create-doctor";
+import ManageArticles from "../../pages/manage-article/manage-article";
+import CreateArticles from "../../pages/manage-article/create-article";
+import ManageTimeLine from "../../pages/manage-time-line/manage-time-line";
+import ManageHospital from "../../pages/manage-hospital/manage-hospital";
+import CreateHospital from "../../pages/manage-hospital/create-hospital";
+import ManageExpertise from "../../pages/manage-expertise/manage-expertise";
+import CreateExpertise from "../../pages/manage-expertise/create-expertise";
+import ManageCategory from "../../pages/manage-category/manage-category";
+import CreateCategory from "../../pages/manage-category/create-category";
+import ManageAdmin from "../../pages/manage-admin/manage-admin";
+import CreateAdmin from "../../pages/manage-admin/create-admin";
 
 class Layout extends React.Component {
   static propTypes = {
@@ -94,7 +101,7 @@ class Layout extends React.Component {
       >
         <Sidebar />
         <div className={s.wrap}>
-          <Header />
+          {/* <Header /> */}
 
           <Hammer onSwipe={this.handleSwipe}>
             <main className={s.content}>
@@ -109,22 +116,31 @@ class Layout extends React.Component {
                     <Route
                       path="/app/main"
                       exact
-                      render={() => <Redirect to="/app/main/dashboard" />}
+                      render={() => <Redirect to="/app/manage-doctor" />}
                     />
-                    <Route
-                      path="/app/main/dashboard"
-                      exact
-                      component={Dashboard}
-                    />
-                    <Route path={"/app/typography"} component={Typography} />
-                    <Route path={"/app/tables"} component={Tables} />
-                    <Route path={"/app/ui/maps"} component={Maps} />
-                    <Route
-                      path={"/app/ui/notifications"}
-                      component={Notifications}
-                    />
-                    <Route path={"/app/ui/icons"} component={Icons} />
-                    <Route path={"/app/ui/charts"} component={Charts} />
+
+                    <Route path={"/app/manage-admin/create"} component={CreateAdmin} />
+                    <Route path={"/app/manage-admin"} exact component={ManageAdmin} />
+
+                    <Route path={"/app/manage-user/detail"}  component={UserDetail} />
+                    <Route path={"/app/manage-user"} component={ManageUser} />
+
+                    <Route path={"/app/manage-doctor/create"} component={CreateDoctor} />
+                    <Route path={"/app/manage-doctor"} component={ManageDoctor} />
+
+                    <Route path={"/app/manage-article/create"} component={CreateArticles} />
+                    <Route path={"/app/manage-article"} component={ManageArticles} />
+
+                    <Route path={"/app/manage-time-slot"} component={ManageTimeLine} />
+
+                    <Route path={"/app/manage-hospital/create"} component={CreateHospital} />
+                    <Route path={"/app/manage-hospital"} component={ManageHospital} />
+
+                    <Route path={"/app/manage-expertise/create"} component={CreateExpertise} />
+                    <Route path={"/app/manage-expertise"} component={ManageExpertise} />
+
+                    <Route path={"/app/manage-category/create"} component={CreateCategory} />
+                    <Route path={"/app/manage-category"} component={ManageCategory} />
                   </Switch>
                 </CSSTransition>
               </TransitionGroup>

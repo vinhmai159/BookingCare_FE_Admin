@@ -1,0 +1,6 @@
+{
+  "name": "manage-admin",
+  "version": "1.0.0",
+  "main": "manage-admin.js",
+  "license": "MIT"
+}

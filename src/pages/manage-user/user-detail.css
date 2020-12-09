@@ -1,0 +1,51 @@
+.user-detail-row2 {
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 6px;
+    margin-right: 33px;
+    margin-bottom: 10px;
+}
+
+.user-detail-row {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 10%;
+    margin-bottom: 20px;
+}
+
+.user-detail-key {
+    width: 100px;
+}
+    
+.user-detail-value {
+    width: 80%;
+    margin-left: 5%;
+    border: 0px;
+    background-color: #FAFAFA;
+}
+
+.user-detail-button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 50px;
+    margin-top: 10px;
+}
+
+.user-detail-component {
+    top                   : 0;
+    left                  : 50%;
+    right                 : auto;
+    bottom                : auto;
+    marginRight           : -50%;
+    transform             : translate(0%, -135%);
+
+
+    background-color: #ffffff;
+
+    border:0.03px solid rgb(173, 171, 171);
+    border-radius: 30px;
+    box-shadow: 20px 40px  50px rgb(83, 83, 83);
+
+    padding: 20px 5px;
+}

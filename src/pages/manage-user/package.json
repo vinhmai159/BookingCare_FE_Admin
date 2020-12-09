@@ -1,0 +1,6 @@
+{
+  "name": "manage-user",
+  "version": "1.0.0",
+  "main": "manage-user.js",
+  "license": "MIT"
+}

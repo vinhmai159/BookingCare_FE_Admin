@@ -1,0 +1,6 @@
+{
+  "name": "manage-doctor",
+  "version": "1.0.0",
+  "main": "manage-doctor.js",
+  "license": "MIT"
+}

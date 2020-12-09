@@ -1,27 +1,33 @@
-import React from "react";
 import PropTypes from "prop-types";
+import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { dismissAlert } from "../../actions/alerts";
-import s from "./Sidebar.module.scss";
-import LinksGroup from "./LinksGroup/LinksGroup";
 import {
   changeActiveSidebarItem
 } from "../../actions/navigation";
 import { logoutUser } from "../../actions/user";
-
-import lightDashboardIcon from "../../images/light-dashboard.svg";
-import darkDashboardIcon from "../../images/dark-dashboard.svg";
-import lightTables from "../../images/tables.svg";
-import darkTables from "../../images/tables-dark.svg";
-import lightUI from "../../images/ui-elements.svg";
-import darkUI from "../../images/ui-elements-dark.svg";
-import lightTypography from "../../images/Typography.svg";
-import darkTypography from "../../images/Typography-dark.svg";
-import logo from "../../images/logo.svg";
-import settingsIcon from "../../images/settings.svg";
-import logoutIcon from "../../images/logout.svg";
 import accountIcon from "../../images/account.svg";
+import darkCategory from '../../images/dark-category.svg';
+import darkExpertise from '../../images/dark-expertise.svg';
+import darkHospital from '../../images/dark-hospital.svg';
+import darkDoctor from '../../images/doctor-dark.svg';
+import lightDoctor from '../../images/doctor-light.svg';
+import lightCategory from '../../images/light-category.svg';
+import lightExpertise from '../../images/light-expertise.svg';
+import lightHospital from '../../images/light-hospital.svg';
+import logo from "../../images/logo.svg";
+import logoutIcon from "../../images/logout.svg";
+import settingsIcon from "../../images/settings.svg";
+import darkTime from '../../images/time-dark.svg';
+import lightTime from '../../images/time-light.svg';
+import darkTypography from "../../images/Typography-dark.svg";
+import lightTypography from "../../images/Typography.svg";
+import darkUser from '../../images/user-dark.svg';
+import lightUser from '../../images/user-light.svg';
+import LinksGroup from "./LinksGroup/LinksGroup";
+import s from "./Sidebar.module.scss";
+
 
 class Sidebar extends React.Component {
   static propTypes = {
@@ -60,60 +66,135 @@ class Sidebar extends React.Component {
         <nav className={s.root}>
           <header className={s.logo}>
             <img src={logo} alt="logo" className={s.logoStyle} />
-            <span>Flatlogic&nbsp;</span> One
+            <span>HEALTH&nbsp;</span> Care
           </header>
-          <h5 className={s.navTitle}>APP</h5>
+          <h5 className={s.navTitle}>FEATURE</h5>
           <ul className={s.nav}>
             <LinksGroup
               onActiveSidebarItemChange={activeItem =>
                 this.props.dispatch(changeActiveSidebarItem(activeItem))
               }
               activeItem={this.props.activeItem}
-              header="Dashboard"
+              header="Manage admin"
               isHeader
-              link="/app/main/dashboard"
+              link="/app/manage-admin"
               index="main"
             >
-              {window.location.href.includes("dashboard") ? (
+              {window.location.href.includes("admin") ? (
                 <img
-                  src={darkDashboardIcon}
-                  alt="lightDashboard"
+                  src={darkDoctor}
+                  alt="darkDoctor"
                   width={"24px"}
                   height={"24px"}
                 />
               ) : (
                 <img
-                  src={lightDashboardIcon}
-                  alt="lightDashboard"
+                  src={lightDoctor}
+                  alt="lightUser"
                   width={"24px"}
                   height={"24px"}
                 />
               )}
             </LinksGroup>
-          </ul>
-          <h5 className={s.navTitle}>TEMPLATE</h5>
-          <ul className={s.nav}>
             <LinksGroup
               onActiveSidebarItemChange={activeItem =>
                 this.props.dispatch(changeActiveSidebarItem(activeItem))
               }
               activeItem={this.props.activeItem}
-              header="Typography"
+              header="Manage doctor"
               isHeader
-              link="/app/typography"
+              link="/app/manage-doctor"
               index="main"
             >
-              {window.location.href.includes("typography") ? (
+              {window.location.href.includes("doctor") ? (
+                <img
+                  src={darkDoctor}
+                  alt="darkDoctor"
+                  width={"24px"}
+                  height={"24px"}
+                />
+              ) : (
+                <img
+                  src={lightDoctor}
+                  alt="lightUser"
+                  width={"24px"}
+                  height={"24px"}
+                />
+              )}
+            </LinksGroup>
+            <LinksGroup
+              onActiveSidebarItemChange={activeItem =>
+                this.props.dispatch(changeActiveSidebarItem(activeItem))
+              }
+              activeItem={this.props.activeItem}
+              header="Manage user"
+              isHeader
+              link="/app/manage-user"
+              index="main"
+            >
+              {window.location.href.includes("user") ? (
+                <img
+                  src={darkUser}
+                  alt="darkUser"
+                  width={"24px"}
+                  height={"24px"}
+                />
+              ) : (
+                <img
+                  src={lightUser}
+                  alt="lightUser"
+                  width={"24px"}
+                  height={"24px"}
+                />
+              )}
+            </LinksGroup>
+            <LinksGroup
+              onActiveSidebarItemChange={activeItem =>
+                this.props.dispatch(changeActiveSidebarItem(activeItem))
+              }
+              activeItem={this.props.activeItem}
+              header="Manage time slot"
+              isHeader
+              link="/app/manage-time-slot"
+              index="main"
+            >
+              {window.location.href.includes("timeSlot") ? (
+                <img
+                  src={darkTime}
+                  alt="darkDoctor"
+                  width={"24px"}
+                  height={"24px"}
+                />
+              ) : (
+                <img
+                  src={lightTime}
+                  alt="lightUser"
+                  width={"24px"}
+                  height={"24px"}
+                />
+              )}
+            </LinksGroup>
+            <LinksGroup
+              onActiveSidebarItemChange={activeItem =>
+                this.props.dispatch(changeActiveSidebarItem(activeItem))
+              }
+              activeItem={this.props.activeItem}
+              header="Manage article"
+              isHeader
+              link="/app/manage-article"
+              index="main"
+            >
+              {window.location.href.includes("article") ? (
                 <img
                   src={darkTypography}
-                  alt="lightDashboard"
+                  alt="darkDoctor"
                   width={"24px"}
                   height={"24px"}
                 />
               ) : (
                 <img
                   src={lightTypography}
-                  alt="lightDashboard"
+                  alt="lightUser"
                   width={"24px"}
                   height={"24px"}
                 />
@@ -124,22 +205,22 @@ class Sidebar extends React.Component {
                 this.props.dispatch(changeActiveSidebarItem(activeItem))
               }
               activeItem={this.props.activeItem}
-              header="Tables"
+              header="Manage hospital"
               isHeader
-              link="/app/tables"
+              link="/app/manage-hospital"
               index="main"
             >
-              {window.location.href.includes("tables") ? (
+              {window.location.href.includes("hospital") ? (
                 <img
-                  src={darkTables}
-                  alt="lightDashboard"
+                  src={darkHospital}
+                  alt="darkDoctor"
                   width={"24px"}
                   height={"24px"}
                 />
               ) : (
                 <img
-                  src={lightTables}
-                  alt="lightDashboard"
+                  src={lightHospital}
+                  alt="lightUser"
                   width={"24px"}
                   height={"24px"}
                 />
@@ -150,41 +231,48 @@ class Sidebar extends React.Component {
                 this.props.dispatch(changeActiveSidebarItem(activeItem))
               }
               activeItem={this.props.activeItem}
-              header="UI Elements"
+              header="Manage expertise"
               isHeader
-              link="/app/ui"
-              index="ui"
-              exact={false}
-              childrenLinks={[
-                {
-                  header: "Notifications",
-                  link: "/app/ui/notifications"
-                },
-                {
-                  header: "Charts",
-                  link: "/app/ui/charts"
-                },
-                {
-                  header: "Icons",
-                  link: "/app/ui/icons"
-                },
-                {
-                  header: "Maps",
-                  link: "/app/ui/maps"
-                }
-              ]}
+              link="/app/manage-expertise"
+              index="main"
             >
-              {window.location.href.includes("ui") ? (
+              {window.location.href.includes("expertise") ? (
                 <img
-                  src={darkUI}
-                  alt="lightDashboard"
+                  src={darkExpertise}
+                  alt="darkDoctor"
                   width={"24px"}
                   height={"24px"}
                 />
               ) : (
                 <img
-                  src={lightUI}
-                  alt="lightDashboard"
+                  src={lightExpertise}
+                  alt="lightUser"
+                  width={"24px"}
+                  height={"24px"}
+                />
+              )}
+            </LinksGroup>
+            <LinksGroup
+              onActiveSidebarItemChange={activeItem =>
+                this.props.dispatch(changeActiveSidebarItem(activeItem))
+              }
+              activeItem={this.props.activeItem}
+              header="Manage category"
+              isHeader
+              link="/app/manage-category"
+              index="main"
+            >
+              {window.location.href.includes("category") ? (
+                <img
+                  src={darkCategory}
+                  alt="darkDoctor"
+                  width={"24px"}
+                  height={"24px"}
+                />
+              ) : (
+                <img
+                  src={lightCategory}
+                  alt="lightUser"
                   width={"24px"}
                   height={"24px"}
                 />
