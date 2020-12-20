@@ -11,6 +11,7 @@ class ManageArticles extends React.Component {
     super(props);
 
     this.state = {
+      keyword: null,
       articles: [],
       article: null,
       showDetailPage: false,
@@ -25,6 +26,9 @@ class ManageArticles extends React.Component {
     Axios.get(`http://localhost:3069/article`,{
       headers: {
         'x-access-token': `bearer ${token}` 
+      },
+      params: {
+        keyword: this.state.keyword !== '' ? this.state.keyword : null
       }
     })
     .then((json) => this.setState({articles: json.data.data}))
@@ -51,12 +55,14 @@ class ManageArticles extends React.Component {
       return (
         <div className={s.root}>
           <div className="article-header">
-            <Form className={`d-md-down-none`} inline>
+            <Form className={`d-md-down-none`} inline onSubmit={e => { e.preventDefault(); this.getArticles()}}>
               <Input
                 id="search-input"
                 placeholder="Search"
                 style={{ borderBottomLeftRadius: 4, borderTopLeftRadius: 4 }}
+                onChange={event => { this.setState({keyword: event.target.value});}}
               />
+              <Button color={"warning"} className="mr-xs btn-search" size="sm" ><i className="fa fa-search"></i></Button>
             </Form>
             {/* <a href="#/app/manage-article/create">
               <Button color={"warning"} type="button" className="mr-xs" size="sm">

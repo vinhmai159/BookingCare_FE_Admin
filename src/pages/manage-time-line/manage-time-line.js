@@ -10,6 +10,7 @@ class ManageTimeLine extends React.Component {
         super(props);
     
         this.state = {
+          name: null,
           timeLines: [],
           timeLine: null,
           showDetail: false
@@ -23,6 +24,9 @@ class ManageTimeLine extends React.Component {
         Axios.get('http://localhost:3069/timeslot', {
             headers: {
                 'x-access-token': `bearer ${token}`
+            },
+            params: {
+              name: this.state.name !== '' ? this.state.name : null
             }
         })
         .then((json) => this.setState({timeLines: json.data}))
@@ -31,7 +35,7 @@ class ManageTimeLine extends React.Component {
 
     deleteTimeLine(timeLineId) {
         const token = localStorage.getItem('accessToken');
-        Axios.delete(`http://localhost:3069/timeLine/${timeLineId}/delete`, {
+        Axios.delete(`http://localhost:3069/timeslot/delete/${timeLineId}`, {
           headers: {
             'x-access-token': `bearer ${token}` 
           }
@@ -49,18 +53,20 @@ class ManageTimeLine extends React.Component {
     return (
         <div className={s.root}>
         <div className="timeLine-header">
-          <Form className={`d-md-down-none`} inline>
+          <Form className={`d-md-down-none`} inline onSubmit={e => { e.preventDefault(); this.getTimeLines()}}>
             <Input
               id="search-input"
               placeholder="Search"
               style={{ borderBottomLeftRadius: 4, borderTopLeftRadius: 4 }}
+              onChange={event => { this.setState({name: event.target.value});}}
             />
+            <Button color={"warning"} className="mr-xs btn-search" size="sm" ><i className="fa fa-search"></i></Button>
           </Form>
-          {/* <a href="#/app/manage-timeLine/create">
+          <a href="#/app/manage-time-slot/create">
             <Button color={"warning"} type="button" className="mr-xs" size="sm">
               Create new timeLine 
             </Button>
-          </a> */}
+          </a>
         </div>
         <Table responsive>
           <thead>
@@ -84,9 +90,9 @@ class ManageTimeLine extends React.Component {
                       <i className="fa fa-pencil"/>
                     </a>
                   </Button>
-                  {/* <Button color={"warning"} type="button" className="mr-xs" size="sm" onClick={e => {e.preventDefault(); this.deleteTimeLine(item.id); }}>
+                  <Button color={"warning"} type="button" className="mr-xs" size="sm" onClick={e => {e.preventDefault(); this.deleteTimeLine(item.id); }}>
                     <i className="fa fa-trash-o"/>
-                  </Button> */}
+                  </Button>
                 </td>
               </tr>
             )) }

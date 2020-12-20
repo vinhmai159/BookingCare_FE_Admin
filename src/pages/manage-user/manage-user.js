@@ -10,6 +10,7 @@ class ManageUser extends React.Component {
         super(props);
     
         this.state = {
+          data: null,
           users: [],
           user: null,
           showDetail: false
@@ -23,6 +24,9 @@ class ManageUser extends React.Component {
         Axios.get('http://localhost:3069/user', {
             headers: {
                 'x-access-token': `bearer ${token}`
+            },
+            params: {
+              data: this.state.data !== '' ? this.state.data : null
             }
         })
         .then((json) => this.setState({users: json.data.data}))
@@ -49,12 +53,14 @@ class ManageUser extends React.Component {
     return (
         <div className={s.root}>
         <div className="user-header">
-          <Form className={`d-md-down-none`} inline>
+          <Form className={`d-md-down-none`} inline onSubmit={e => { e.preventDefault(); this.getUsers()}}>
             <Input
               id="search-input"
               placeholder="Search"
               style={{ borderBottomLeftRadius: 4, borderTopLeftRadius: 4 }}
+              onChange={event => { this.setState({data: event.target.value});}}
             />
+            <Button color={"warning"} className="mr-xs btn-search" size="sm" ><i className="fa fa-search"></i></Button>
           </Form>
           {/* <a href="#/app/articles/create">
             <Button color={"warning"} type="button" className="mr-xs" size="sm">

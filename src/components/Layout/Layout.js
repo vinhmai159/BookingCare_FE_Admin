@@ -30,6 +30,7 @@ import ManageCategory from "../../pages/manage-category/manage-category";
 import CreateCategory from "../../pages/manage-category/create-category";
 import ManageAdmin from "../../pages/manage-admin/manage-admin";
 import CreateAdmin from "../../pages/manage-admin/create-admin";
+import CreateTimeLine from "../../pages/manage-time-line/create-time-line";
 
 class Layout extends React.Component {
   static propTypes = {
@@ -131,6 +132,7 @@ class Layout extends React.Component {
                     <Route path={"/app/manage-article/create"} component={CreateArticles} />
                     <Route path={"/app/manage-article"} component={ManageArticles} />
 
+                    <Route path={"/app/manage-time-slot/create"} component={CreateTimeLine} />
                     <Route path={"/app/manage-time-slot"} component={ManageTimeLine} />
 
                     <Route path={"/app/manage-hospital/create"} component={CreateHospital} />

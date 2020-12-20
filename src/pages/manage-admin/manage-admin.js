@@ -10,6 +10,7 @@ class ManageAdmin extends React.Component {
         super(props);
     
         this.state = {
+          name: null,
           admins: [],
           admin: null,
           showDetail: false
@@ -20,7 +21,9 @@ class ManageAdmin extends React.Component {
 
     getAdmins() {
         const token = localStorage.getItem('accessToken');
-        Axios.post('http://localhost:3069/api/admin',{}, {
+        Axios.post('http://localhost:3069/api/admin',{
+          name: this.state.name !== '' ? this.state.name : null
+        }, {
             headers: {
                 'x-access-token': `bearer ${token}`
             }
@@ -49,12 +52,14 @@ class ManageAdmin extends React.Component {
     return (
         <div className={s.root}>
         <div className="admin-header">
-          <Form className={`d-md-down-none`} inline>
+          <Form className={`d-md-down-none`} inline onSubmit={e => { e.preventDefault(); this.getAdmins()}}>
             <Input
               id="search-input"
               placeholder="Search"
               style={{ borderBottomLeftRadius: 4, borderTopLeftRadius: 4 }}
+              onChange={event => { this.setState({name: event.target.value});}}
             />
+            <Button color={"warning"} className="mr-xs btn-search" size="sm" ><i className="fa fa-search"></i></Button>
           </Form>
           <a href="#/app/manage-admin/create">
             <Button color={"warning"} type="button" className="mr-xs" size="sm">

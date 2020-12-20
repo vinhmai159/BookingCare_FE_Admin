@@ -10,6 +10,8 @@ class CreateDoctor extends React.Component {
     super(props);
 
     this.state = {
+        expertise: [],
+        hospitals: [],
         fistName: null,
         lastName: null,
         description: null,
@@ -19,6 +21,9 @@ class CreateDoctor extends React.Component {
         email: null,
         password: null
     }
+
+    this.getExpertise();
+    this.getHospitals();
   }
 
   createDoctor(e) {
@@ -40,10 +45,31 @@ class CreateDoctor extends React.Component {
     })
     .then(() => window.location.href = "#/app/manage-doctor")
     .catch((error) => Alert(error));
-
-
   }
 
+  getExpertise() {
+    const token = localStorage.getItem('accessToken');
+
+    Axios.post(`http://localhost:3069/expertise`, {},{
+      headers: {
+        'x-access-token': `bearer ${token}` 
+      }
+    })
+    .then((json) => this.setState({expertise: json.data[0]}))
+    .catch((error) => Alert(error));
+  }
+
+  getHospitals() {
+    const token = localStorage.getItem('accessToken');
+
+    Axios.get(`http://localhost:3069/hospital`,{
+      headers: {
+        'x-access-token': `bearer ${token}` 
+      }
+    })
+    .then((json) => this.setState({hospitals: json.data[0]}))
+    .catch((error) => Alert(error));
+  }
 
   render() {
     return (
@@ -91,20 +117,30 @@ class CreateDoctor extends React.Component {
             </div>
             <div className="doctor-row2">
                 <label for="expertise" className="doctor-key">Choose a expertise:</label>
-                <select name="expertise" id="expertiseId" className="create-doctor-value">
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
+                <select 
+                  name="expertise" 
+                  id="expertiseId" 
+                  className="create-doctor-value" 
+                  onChange={event => { this.setState({expertiseId: event.target.value})}}
+                >
+                  <option value={null}>Select expertise...</option>
+                  {this.state.expertise !== [] && this.state.expertise.map((item) => (
+                    <option value={item.id}>{item.name}</option>
+                  ))}
                 </select>
             </div>
             <div className="doctor-row2">
                 <label for="hospital" className="doctor-key">Choose a hospital:</label>
-                <select name="hospital" id="hospitalId" className="create-doctor-value">
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="mercedes">Mercedes</option>
-                  <option value="audi">Audi</option>
+                <select 
+                  name="hospital" 
+                  id="hospitalId" 
+                  className="create-doctor-value" 
+                  onChange={event => { this.setState({hospitalId: event.target.value})}}
+                >
+                  <option value={null}>Select hospital...</option>
+                  {this.state.hospitals !== [] && this.state.hospitals.map((item) => (
+                    <option value={item.id}>{item.name}</option>
+                  ))}
                 </select>
             </div>
             <div className="doctor-row2">

@@ -10,6 +10,7 @@ class ManageHospital extends React.Component {
         super(props);
     
         this.state = {
+          name: null,
           hospitals: [],
           hospital: null,
           showDetail: false
@@ -23,6 +24,9 @@ class ManageHospital extends React.Component {
         Axios.get('http://localhost:3069/hospital', {
             headers: {
                 'x-access-token': `bearer ${token}`
+            },
+            params: {
+              name: this.state.name !== '' ? this.state.name : null
             }
         })
         .then((json) => this.setState({hospitals: json.data[0]}))
@@ -49,12 +53,14 @@ class ManageHospital extends React.Component {
     return (
         <div className={s.root}>
         <div className="hospital-header">
-          <Form className={`d-md-down-none`} inline>
+          <Form className={`d-md-down-none`} inline onSubmit={e => { e.preventDefault(); this.getHospitals()}}>
             <Input
               id="search-input"
               placeholder="Search"
               style={{ borderBottomLeftRadius: 4, borderTopLeftRadius: 4 }}
+              onChange={event => { this.setState({name: event.target.value});}}
             />
+            <Button color={"warning"} className="mr-xs btn-search" size="sm" ><i className="fa fa-search"></i></Button>
           </Form>
           <a href="#/app/manage-hospital/create">
             <Button color={"warning"} type="button" className="mr-xs" size="sm">

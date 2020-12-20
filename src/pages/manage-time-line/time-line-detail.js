@@ -8,21 +8,29 @@ class TimeLineDetail extends React.Component {
         super(props);
     
         this.state = {
-          name: null
+            startTime: null,
+            endTime: null
         }
     }
 
     updateTimeLine(timeLineId) {
         const token = localStorage.getItem('accessToken');
         Axios.put(`http://localhost:3069/timeslot/update/${timeLineId}`, {
-            name: this.state.name ? this.state.name : undefined,
+            startTime: this.state.startTime ? this.state.startTime : undefined,
+            endTime: this.state.endTime ? this.state.endTime : undefined,
         }, {
             headers: {
                 'x-access-token': `bearer ${token}`
             }
         })
         .then(() => window.location.reload(false))
-        .catch((error) => alert(error));
+        .catch((error) => {
+            if (error.response){
+                alert(error.response.data.message);        
+            } else {
+                alert(error);
+            } 
+        });
     }
 
     handleRefresh = (e) => {
@@ -39,12 +47,21 @@ class TimeLineDetail extends React.Component {
             <div className="timeLine-component">
                 <form>
                     <div className="timeLine-row">
-                        <label className="timeLine-key">Name:</label>
+                        <label className="timeLine-key">Start time:</label>
                         <input 
                             className="timeLine-value"
                             type="text"
-                            defaultValue={this.props.timeLine ? this.props.timeLine.name : null}
-                            onChange={event => this.setState({ name: event.target.value }) }
+                            defaultValue={this.props.timeLine ? this.props.timeLine.name.slice(0,5) : null}
+                            onChange={event => this.setState({ startTime: event.target.value }) }
+                        />
+                    </div>
+                    <div className="timeLine-row">
+                        <label className="timeLine-key">End time:</label>
+                        <input 
+                            className="timeLine-value"
+                            type="text"
+                            defaultValue={this.props.timeLine ? this.props.timeLine.name.slice(8,13) : null}
+                            onChange={event => this.setState({ endTime: event.target.value }) }
                         />
                     </div>
                     <div className="timeLine-button">
